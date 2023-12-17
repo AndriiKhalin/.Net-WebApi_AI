@@ -1,0 +1,76 @@
+﻿@model IEnumerable<ComponentComputer>
+
+@{
+    ViewData["Title"] = "Component Computer List";
+}
+
+<h3>@ViewData["Title"]</h3>
+<hr/>
+<form>
+    <button asp-action="Create" asp-controller="ComponentComputer" class="btn btn-primary mb-3">Create Components</button>
+    <table class="table table-responsive table-bordered table-hover">
+        <thead>
+        <tr class="table-active text-center">
+            <th>
+                <i class="@ViewData["IconId"]"></i>
+                <a asp-action="Index" asp-route-sortState="@ViewBag.IdSort" class="text-decoration-none  text-dark">
+                    @Html.DisplayNameFor(model => model.Id)
+                </a>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model=>model.ProcessorId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model=>model.HardDriveId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MotherBoardId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RamId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UnitId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VideoCardId)
+            </th>
+            <th>
+                Action
+            </th>
+
+        </tr>
+        </thead>
+        <tbody>
+        @if (Model != null && Model.Any())
+        {
+            @foreach (var componentComputer in Model)
+            {
+                    <tr class="text-center">
+                        <td>@componentComputer.Id</td>
+                        <td>@componentComputer.ProcessorId</td>
+                        <td>@componentComputer.HardDriveId</td>
+                        <td>@componentComputer.MotherBoardId</td>
+                        <td>@componentComputer.RamId</td>
+                        <td>@componentComputer.UnitId</td>
+                    <td>@componentComputer.VideoCardId</td>
+                    <td>
+                            <div>
+                                <a asp-controller="ComponentComputer" asp-action="Update" asp-route-id="@componentComputer.Id" class="btn btn-success btn-sm ">Edit</a>
+                                <a asp-controller="ComponentComputer" asp-action="Delete" asp-route-id="@componentComputer.Id" class="btn btn-danger btn-sm ">Delete</a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="4">
+                    <div>No Components avaialble at this moment! </div>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</form>

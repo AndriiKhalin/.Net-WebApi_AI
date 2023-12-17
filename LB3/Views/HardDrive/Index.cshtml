@@ -1,0 +1,81 @@
+﻿@model IEnumerable<HardDrive>
+
+@{
+    ViewData["Title"] = "Hard Drive List";
+}
+
+<h3>@ViewData["Title"]</h3>
+<hr />
+<form>
+    <button asp-action="Create" asp-controller="HardDrive" class="btn btn-primary mb-3">Create Hard Drive</button>
+    <table class="table table-responsive table-bordered table-hover">
+        <thead>
+        <tr class="table-active text-center">
+            <th>
+                <i class="@ViewData["IconId"]"></i>
+                <a asp-action="Index" asp-route-sortState="@ViewBag.IdSort" class="text-decoration-none  text-dark">
+                    @Html.DisplayNameFor(model => model.Id)
+                </a>
+            </th>
+            <th>
+                <i class="@ViewData["IconName"]"></i>
+                <a asp-action="Index" asp-route-sortState="@ViewBag.NameSort" class="text-decoration-none  text-dark">
+                    @Html.DisplayNameFor(model => model.Name)
+                </a>
+            </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.HardDriveType)
+                </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StorageSize)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReadWriteSpeed)
+            </th>
+            @* <th>
+                @Html.DisplayNameFor(model => model.Image)
+            </th> *@
+            <th>
+                <i class="@ViewData["IconPrice"]"></i>
+                <a asp-action="Index" asp-route-sortState="@ViewBag.PriceSort" class="text-decoration-none  text-dark">
+                    @Html.DisplayNameFor(model => model.Price)
+                </a>
+            </th>
+            <th>
+                Action
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        @if (Model != null && Model.Any())
+        {
+            @foreach (var hardDrive in Model)
+            {
+                    <tr class="text-center">
+                        <td>@hardDrive.Id</td>
+                        <td>@hardDrive.Name</td>
+                        <td>@hardDrive.HardDriveType</td>
+                        <td>@hardDrive.StorageSize</td>
+                        <td>@hardDrive.ReadWriteSpeed</td>
+                        @* <td>@hardDrive.Image</td> *@
+                        <td>@hardDrive.Price</td>
+                    <td class="text-center">
+                        <div>
+                                <a asp-controller="HardDrive" asp-action="Update" asp-route-id="@hardDrive.Id" class="btn btn-success btn-sm">Edit</a>
+                                <a asp-controller="HardDrive" asp-action="Delete" asp-route-id="@hardDrive.Id" class="btn btn-danger btn-sm">Delete</a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="4">
+                        <div>No HardDrive avaialble at this moment! </div>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</form>

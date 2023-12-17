@@ -1,0 +1,53 @@
+﻿@model Computer
+
+@{
+    ViewData["Title"] = "Delete Computer";
+}
+<form method="post" asp-action="Delete">
+    <div class="card">
+        <div class="card-header text-center fw-bold bg-danger">
+            <h2>@ViewData["Title"]</h2>
+        </div>
+        <div class="card-body">
+            @* <input type="hidden" asp-for="Id"/> *@
+            <div class="form-floating mb-2">
+                <input asp-for="Name" class="form-control" readonly/>
+                <label asp-for="Name"></label>
+                
+            </div>
+
+            <div class="form-floating mb-2">
+                <input asp-for="CreatedDate" class="form-control" readonly />
+                <label asp-for="CreatedDate"></label>
+                
+            </div>
+            <div class="form-floating mb-2">
+                <input asp-for="LastUpdatedDate" class="form-control" readonly />
+                <label asp-for="LastUpdatedDate"></label>
+                
+            </div>
+            @* <div class="form-floating mb-2">
+                <input asp-for="Image" class="form-control" readonly />
+                <label asp-for="Image"></label>
+            </div> *@
+            <div class="form-floating mb-2">
+                <input asp-for="ComponentComputerId" class="form-control" readonly />
+                <label asp-for="ComponentComputerId"></label>
+            </div>
+            <div>
+                
+                <div class="d-grid gap-2  d-md-flex justify-content-md-center">
+                    <button type="submit" class="btn btn-danger me-md-2 col-3">Delete</button>
+                    <a asp-controller="Computer" asp-action="Index" class="btn btn-primary col-3">Back</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+@section Scripts
+{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+

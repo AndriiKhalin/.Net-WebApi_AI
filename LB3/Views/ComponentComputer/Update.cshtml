@@ -1,0 +1,59 @@
+﻿@model ComponentComputer
+
+@{
+    ViewData["Title"] = "Update Component Computer";
+}
+<form method="post" asp-action="Update">
+    <div class="card">
+        <div class="card-header text-center fw-bold bg-success">
+            <h2>@ViewData["Title"]</h2>
+        </div>
+        <div class="card-body">
+            @*<input type="hidden" asp-for="Id"/>*@
+            <div class="form-floating mb-2">
+                <input asp-for="ProcessorId" class="form-control" />
+                <label asp-for="ProcessorId"></label>
+                <span asp-validation-for="ProcessorId" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-2">
+                <input asp-for="HardDriveId" class="form-control" />
+                <label asp-for="HardDriveId"></label>
+                <span asp-validation-for="HardDriveId" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-2">
+                <input asp-for="MotherBoardId" class="form-control" />
+                <label asp-for="MotherBoardId"></label>
+                <span asp-validation-for="MotherBoardId" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-2">
+                <input asp-for="RamId" class="form-control" />
+                <label asp-for="RamId"></label>
+                <span asp-validation-for="RamId" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-2">
+                <input asp-for="VideoCardId" class="form-control" />
+                <label asp-for="VideoCardId"></label>
+                <span asp-validation-for="VideoCardId" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-2">
+                <input asp-for="UnitId" class="form-control" />
+                <label asp-for="UnitId"></label>
+                <span asp-validation-for="UnitId" class="text-danger"></span>
+            </div>
+            <div>
+                
+                <div class="d-grid gap-2   d-md-flex justify-content-md-center">
+                    <button type="submit" class="btn btn-success me-md-2 col-3">Update</button>
+                    <a asp-controller="ComponentComputer" asp-action="Index" class="btn btn-primary col-3">Back</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+@section Scripts
+{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+

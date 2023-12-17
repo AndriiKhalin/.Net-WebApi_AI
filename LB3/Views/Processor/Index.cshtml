@@ -1,0 +1,102 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using LB_2.Models
+@model IEnumerable<Processor>
+
+@{
+    ViewData["Title"] = "Processor List";
+}
+
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
+
+<h3>@ViewData["Title"]</h3>
+
+<hr />
+<form>
+    <button asp-action="Create" asp-controller="Processor" class="btn btn-primary mb-3">Create Processor</button>
+    <table class="table table-responsive table-bordered table-hover">
+        <thead>
+            <tr class="table-active text-center">
+                <th>
+                    <i class="@ViewData["IconId"]"></i>
+                    <a asp-action="Index" asp-route-sortState="@ViewBag.IdSort" class="text-decoration-none  text-dark">
+                        @Html.DisplayNameFor(model => model.Id)
+                    </a>
+
+                </th>
+                <th>
+                    <i class="@ViewData["IconName"]"></i>
+                    <a asp-action="Index" asp-route-sortState="@ViewBag.NameSort" class="text-decoration-none  text-dark">
+                        @Html.DisplayNameFor(model => model.Name)
+                    </a>
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.SocketType)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ProcessorFamily)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ProcessorGeneration)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NumCores)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NumThreads)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ClockFrequency)
+                </th>
+               @*  <th>
+                    @Html.DisplayNameFor(model => model.Image)
+                </th> *@
+               <th>
+                    <i class="@ViewData["IconPrice"]"></i>
+                    <a asp-action="Index" asp-route-sortState="@ViewBag.PriceSort" class="text-decoration-none  text-dark">
+                        @Html.DisplayNameFor(model => model.Price)
+                   </a>
+                   
+               </th>
+                <th>
+                    Actions
+                </th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Any())
+            {
+                @foreach (var processor in Model)
+                {
+                    <tr class="text-center">
+                        <td>@processor.Id</td>
+                        <td>@processor.Name</td>
+                        <td>@processor.SocketType</td>
+                        <td>@processor.ProcessorFamily</td>
+                        <td>@processor.ProcessorGeneration</td>
+                        <td>@processor.NumCores</td>
+                        <td>@processor.NumThreads</td>
+                        <td>@processor.ClockFrequency</td>
+                        @* <td>@processor.Image</td> *@
+                        <td>@processor.Price</td>
+                        <td>
+                            <div >
+                                <a asp-controller="Processor" asp-action="Update" asp-route-id="@processor.Id" class="btn btn-success btn-sm">Edit</a>
+                                <a asp-controller="Processor" asp-action="Delete" asp-route-id="@processor.Id" class="btn btn-danger btn-sm">Delete</a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="4">
+                        <div>No Processor avaialble at this moment! </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</form>

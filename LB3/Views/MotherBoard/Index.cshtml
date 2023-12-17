@@ -1,0 +1,82 @@
+﻿@model IEnumerable<MotherBoard>
+
+@{
+    ViewData["Title"] = "MotherBoard List";
+}
+
+<h3>@ViewData["Title"]</h3>
+<hr />
+<form>
+    <button asp-action="Create" asp-controller="MotherBoard" class="btn btn-primary mb-3">Create MotherBoard</button>
+    <table class="table table-responsive table-bordered table-hover">
+        <thead>
+            <tr class="table-active text-center">
+                <th>
+                    <i class="@ViewData["IconId"]"></i>
+                    <a asp-action="Index" asp-route-sortState="@ViewBag.IdSort" class="text-decoration-none  text-dark">
+                        @Html.DisplayNameFor(model => model.Id)
+                    </a>
+                </th>
+                <th>
+                    <i class="@ViewData["IconName"]"></i>
+                    <a asp-action="Index" asp-route-sortState="@ViewBag.NameSort" class="text-decoration-none  text-dark">
+                        @Html.DisplayNameFor(model => model.Name)
+                    </a>
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FormFactor)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Chipset)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Socket)
+                </th>
+                @* <th>
+                    @Html.DisplayNameFor(model => model.Image)
+                </th> *@
+                <th>
+                    <i class="@ViewData["IconPrice"]"></i>
+                    <a asp-action="Index" asp-route-sortState="@ViewBag.PriceSort" class="text-decoration-none  text-dark">
+                        @Html.DisplayNameFor(model => model.Price)
+                    </a>
+                </th>
+                <th>
+                    Action
+                </th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Any())
+            {
+                @foreach (var motherBoard in Model)
+                {
+                    <tr class="text-center">
+                        <td>@motherBoard.Id</td>
+                        <td>@motherBoard.Name</td>
+                        <td>@motherBoard.FormFactor</td>
+                        <td>@motherBoard.Chipset</td>
+                        <td>@motherBoard.Socket</td>
+                        @* <td>@motherBoard.Image</td> *@
+                        <td>@motherBoard.Price</td>
+                        <td class="text-center">
+                            <div>
+                                <a asp-controller="MotherBoard" asp-action="Update" asp-route-id="@motherBoard.Id" class="btn btn-success btn-sm">Edit</a>
+                                <a asp-controller="MotherBoard" asp-action="Delete" asp-route-id="@motherBoard.Id" class="btn btn-danger btn-sm">Delete</a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="4">
+                        <div>No MotherBoard avaialble at this moment! </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</form>

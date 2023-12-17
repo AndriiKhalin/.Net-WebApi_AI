@@ -1,0 +1,82 @@
+﻿@model IEnumerable<Computer>
+
+@{
+    ViewData["Title"] = "Computer List";
+}
+
+<h3>@ViewData["Title"]</h3>
+<hr/>
+<form>
+<button asp-action="Create" asp-controller="Computer" class="btn btn-primary mb-3">Create Computer</button>
+<table class="table table-responsive table-bordered table-hover">
+    <thead>
+    <tr class="table-active text-center">
+        <th>
+            <i class="@ViewData["IconId"]"></i>
+            <a asp-action="Index" asp-route-sortState="@ViewBag.IdSort" class="text-decoration-none  text-dark">
+                @Html.DisplayNameFor(model => model.Id)
+            </a>
+        </th>
+        <th>
+            <i class="@ViewData["IconName"]"></i>
+            <a asp-action="Index" asp-route-sortState="@ViewBag.NameSort" class="text-decoration-none  text-dark">
+                @Html.DisplayNameFor(model => model.Name)
+            </a>
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatedDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastUpdatedDate)
+        </th>
+        @* <th>
+            @Html.DisplayNameFor(model => model.Image)
+        </th> *@
+        <th>
+            @Html.DisplayNameFor(model => model.ComponentComputerId)
+        </th>
+
+        <th>
+            <i class="@ViewData["IconPrice"]"></i>
+            <a asp-action="Index" asp-route-sortState="@ViewBag.PriceSort" class="text-decoration-none  text-dark">
+                @Html.DisplayNameFor(model => model.Price)
+            </a>
+            </th>
+        <th>
+            Action
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    @if (Model != null && Model.Any())
+    {
+        @foreach (var computer in Model)
+        {
+                    <tr class="text-center">
+                <td>@computer.Id</td>
+                <td>@computer.Name</td>
+                <td>@computer.Price</td>
+                <td>@computer.CreatedDate</td>
+                <td>@computer.LastUpdatedDate</td>
+                @* <td>@computer.Image</td> *@
+                <td>@computer.ComponentComputerId</td>
+                <td class="text-center">
+                            <div>
+                                <a asp-controller="Computer" asp-action="Update" asp-route-id="@computer.Id" class="btn btn-success btn-sm">Edit</a>
+                                <a asp-controller="Computer" asp-action="Delete" asp-route-id="@computer.Id" class="btn btn-danger btn-sm">Delete</a>
+                    </div>
+                </td>
+            </tr>
+        }
+    }
+    else
+    {
+        <tr>
+            <td colspan="4">
+                <div>No Computer avaialble at this moment! </div>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+</form>

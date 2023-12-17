@@ -1,0 +1,58 @@
+﻿@model MotherBoard
+
+@{
+    ViewData["Title"] = "Create MotherBoard";
+}
+<form method="post" asp-action="Create">
+    <div class="card">
+        <div class="card-header text-center fw-bold bg-primary">
+            <h2>@ViewData["Title"]</h2>
+        </div>
+        <div class="card-body">
+            @*<input type="hidden" asp-for="Id"/>*@
+            <div class="form-floating mb-2">
+                <input asp-for="Name" class="form-control" />
+                <label asp-for="Name"></label>
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-2">
+                <input asp-for="FormFactor" class="form-control" />
+                <label asp-for="FormFactor"></label>
+                <span asp-validation-for="FormFactor" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-2">
+                <input asp-for="Chipset" class="form-control" />
+                <label asp-for="Chipset"></label>
+                <span asp-validation-for="Chipset" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-2">
+                <input asp-for="Socket" class="form-control" />
+                <label asp-for="Socket"></label>
+                <span asp-validation-for="Socket" class="text-danger"></span>
+            </div>
+            @* <div class="form-floating mb-2">
+                <input asp-for="Image" class="form-control" />
+                <label asp-for="Image"></label>
+                <span asp-validation-for="Image" class="text-danger"></span>
+            </div> *@
+            <div class="form-floating mb-2">
+                <input asp-for="Price" class="form-control" />
+                <label asp-for="Price"></label>
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            
+            <div>
+                <div class="d-grid gap-2   d-md-flex justify-content-md-center">
+                    <button type="submit" class="btn btn-success me-md-2 col-3">Create</button>
+                    <a asp-controller="MotherBoard" asp-action="Index" class="btn btn-primary col-3">Back</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+@section Scripts
+{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

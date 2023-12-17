@@ -1,0 +1,77 @@
+﻿@model Processor
+
+@{
+    ViewData["Title"] = "Update Processor";
+}
+<form method="post" asp-action="Update">
+    <div class="card">
+        <div class="card-header text-center fw-bold bg-success">
+            <h2>@ViewData["Title"]</h2>
+        </div>
+        <div class="card-body">
+            @*<input type="hidden" asp-for="Id"/>*@
+            <div class="form-floating mb-2">
+                <input asp-for="Name" class="form-control" />
+                <label asp-for="Name"></label>
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-2">
+                <input asp-for="SocketType" class="form-control" />
+                <label asp-for="SocketType"></label>
+                <span asp-validation-for="SocketType" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-2">
+                <input asp-for="ProcessorFamily" class="form-control" />
+                <label asp-for="ProcessorFamily"></label>
+                <span asp-validation-for="ProcessorFamily" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-2">
+                <input asp-for="ProcessorGeneration" class="form-control" />
+                <label asp-for="ProcessorGeneration"></label>
+                <span asp-validation-for="ProcessorGeneration" class="text-danger"></span>
+            </div>
+
+            <div class="form-floating mb-2">
+                <input asp-for="NumCores" class="form-control" />
+                <label asp-for="NumCores"></label>
+                <span asp-validation-for="NumCores" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-2">
+                <input asp-for="NumThreads" class="form-control" />
+                <label asp-for="NumThreads"></label>
+                <span asp-validation-for="NumThreads" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-2">
+                <input asp-for="ClockFrequency" class="form-control" />
+                <label asp-for="ClockFrequency"></label>
+                <span asp-validation-for="ClockFrequency" class="text-danger"></span>
+            </div>
+
+           @*  <div class="form-floating mb-2">
+                <input asp-for="Image" class="form-control" />
+                <label asp-for="Image"></label>
+                <span asp-validation-for="Image" class="text-danger"></span>
+            </div> *@
+            <div class="form-floating mb-2">
+                <input asp-for="Price" class="form-control" />
+                <label asp-for="Price"></label>
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+
+
+            <div>
+                <div class="d-grid gap-2   d-md-flex justify-content-md-center">
+                    <button type="submit" class="btn btn-success me-md-2 col-3">Update</button>
+                    <a asp-controller="Processor" asp-action="Index" class="btn btn-primary col-3">Back</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+@section Scripts
+{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
