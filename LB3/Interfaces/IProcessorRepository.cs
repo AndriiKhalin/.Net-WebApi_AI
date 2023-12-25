@@ -1,4 +1,5 @@
 ﻿using LB3.Features;
+using Microsoft.ML;
 
 namespace LB3.Interfaces;
 
@@ -15,5 +16,7 @@ public interface IProcessorRepository
     Task Update(Processor processor);
 
     Task Delete(int id);
+
+    float CalculatePerformance(Processor processor);
 
 }

@@ -8,14 +8,16 @@ public static class SeedData
         {
             var intel1 = new Processor()
             {
-                Name = "Intel i5 7300",
+                Name = "Intel Core i5-7300",
+                ProcessorManufacturer = "Intel",
+                ProcessorSeries = "Core i5",
+                ProcessorGeneration = 7,
+                ProcessorModel = "7300",
                 ClockFrequency = 3200,
                 SocketType = "socket",
                 NumCores = 6,
                 NumThreads = 12,
-                Price = 10000,
-                ProcessorFamily = "i5",
-                ProcessorGeneration = "socket 1700"
+                Price = 10000
             };
             var intel2 = new Processor()
             {
@@ -25,10 +27,209 @@ public static class SeedData
                 SocketType = "socket",
                 NumThreads = 12,
                 Price = 1000,
-                ProcessorFamily = "i5",
-                ProcessorGeneration = "socket 1800"
+                ProcessorModel = "i5",
+                ProcessorGeneration = 5
             };
-            context.Processors.AddRangeAsync(intel1, intel2);
+            var intel3 = new Processor()
+            {
+                Name = "Intel i5 7300",
+                ClockFrequency = 3200,
+                SocketType = "socket",
+                NumCores = 6,
+                NumThreads = 12,
+                Price = 10000,
+                ProcessorModel = "i5",
+                ProcessorGeneration = 5
+            };
+            var intel4 = new Processor()
+            {
+                Name = "Intel i5 8400",
+                ClockFrequency = 4200,
+                NumCores = 6,
+                SocketType = "socket",
+                NumThreads = 12,
+                Price = 1000,
+                ProcessorModel = "i5",
+                ProcessorGeneration = 5
+            };
+            var intel5 = new Processor()
+            {
+                Name = "Intel i5 7300",
+                ClockFrequency = 3200,
+                SocketType = "socket",
+                NumCores = 6,
+                NumThreads = 12,
+                Price = 10000,
+                ProcessorModel = "i5",
+                ProcessorGeneration = 5
+            };
+            var intel6 = new Processor()
+            {
+                Name = "Intel i5 8400",
+                ClockFrequency = 4200,
+                NumCores = 6,
+                SocketType = "socket",
+                NumThreads = 12,
+                Price = 1000,
+                ProcessorModel = "i5",
+                ProcessorGeneration = 5
+            };
+            var intel7 = new Processor()
+            {
+                Name = "Intel i5 7300",
+                ClockFrequency = 3200,
+                SocketType = "socket",
+                NumCores = 6,
+                NumThreads = 12,
+                Price = 10000,
+                ProcessorModel = "i5",
+                ProcessorGeneration = 5
+            };
+            var intel8 = new Processor()
+            {
+                Name = "Intel i5 8400",
+                ClockFrequency = 4200,
+                NumCores = 6,
+                SocketType = "socket",
+                NumThreads = 12,
+                Price = 1000,
+                ProcessorModel = "i5",
+                ProcessorGeneration = 5
+            };
+            var intel9 = new Processor()
+            {
+                Name = "Intel i5 7300",
+                ClockFrequency = 3200,
+                SocketType = "socket",
+                NumCores = 6,
+                NumThreads = 12,
+                Price = 10000,
+                ProcessorModel = "i5",
+                ProcessorGeneration = 5
+            };
+            var intel10 = new Processor()
+            {
+                Name = "Intel i5 8400",
+                ClockFrequency = 4200,
+                NumCores = 6,
+                SocketType = "socket",
+                NumThreads = 12,
+                Price = 1000,
+                ProcessorModel = "i5",
+                ProcessorGeneration = 5
+            };
+            var intel11 = new Processor()
+            {
+                Name = "Intel i5 7300",
+                ClockFrequency = 3200,
+                SocketType = "socket",
+                NumCores = 6,
+                NumThreads = 12,
+                Price = 10000,
+                ProcessorModel = "i5",
+                ProcessorGeneration = 5
+            };
+            var intel12 = new Processor()
+            {
+                Name = "Intel i5 8400",
+                ClockFrequency = 4200,
+                NumCores = 6,
+                SocketType = "socket",
+                NumThreads = 12,
+                Price = 1000,
+                ProcessorModel = "i5",
+                ProcessorGeneration = 5
+            };
+            var intel13 = new Processor()
+            {
+                Name = "Intel i5 7300",
+                ClockFrequency = 3200,
+                SocketType = "socket",
+                NumCores = 6,
+                NumThreads = 12,
+                Price = 10000,
+                ProcessorModel = "i5",
+                ProcessorGeneration = 5
+            };
+            var intel14 = new Processor()
+            {
+                Name = "Intel i5 8400",
+                ClockFrequency = 4200,
+                NumCores = 6,
+                SocketType = "socket",
+                NumThreads = 12,
+                Price = 1000,
+                ProcessorModel = "i5",
+                ProcessorGeneration = 5
+            };
+            var intel15 = new Processor()
+            {
+                Name = "Intel i5 7300",
+                ClockFrequency = 3200,
+                SocketType = "socket",
+                NumCores = 6,
+                NumThreads = 12,
+                Price = 10000,
+                ProcessorModel = "i5",
+                ProcessorGeneration = 5
+            };
+            var intel16 = new Processor()
+            {
+                Name = "Intel i5 8400",
+                ClockFrequency = 4200,
+                NumCores = 6,
+                SocketType = "socket",
+                NumThreads = 12,
+                Price = 1000,
+                ProcessorModel = "i5",
+                ProcessorGeneration = 5
+            };
+            var intel17 = new Processor()
+            {
+                Name = "Intel i5 7300",
+                ClockFrequency = 3200,
+                SocketType = "socket",
+                NumCores = 6,
+                NumThreads = 12,
+                Price = 10000,
+                ProcessorModel = "i5",
+                ProcessorGeneration = 5
+            };
+            var intel18 = new Processor()
+            {
+                Name = "Intel i5 8400",
+                ClockFrequency = 4200,
+                NumCores = 6,
+                SocketType = "socket",
+                NumThreads = 12,
+                Price = 1000,
+                ProcessorModel = "i5",
+                ProcessorGeneration = 5
+            };
+            var intel19 = new Processor()
+            {
+                Name = "Intel i5 7300",
+                ClockFrequency = 3200,
+                SocketType = "socket",
+                NumCores = 6,
+                NumThreads = 12,
+                Price = 10000,
+                ProcessorModel = "i5",
+                ProcessorGeneration = 5
+            };
+            var intel20 = new Processor()
+            {
+                Name = "Intel i5 8400",
+                ClockFrequency = 4200,
+                NumCores = 6,
+                SocketType = "socket",
+                NumThreads = 12,
+                Price = 1000,
+                ProcessorModel = "i5",
+                ProcessorGeneration = 5
+            };
+            context.Processors.AddRangeAsync(intel1, intel2, intel3, intel4, intel5, intel6, intel7, intel8
+                , intel9, intel10, intel11, intel12, intel13, intel14, intel15, intel16, intel17, intel18, intel19, intel20);
 
 
             var nvidia = new VideoCard()

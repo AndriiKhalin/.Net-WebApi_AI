@@ -1,5 +1,7 @@
 ﻿using LB3.Features;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.ML;
+using System.Diagnostics;
 
 namespace LB3.Controllers;
 
@@ -7,11 +9,61 @@ public class ProcessorController : Controller
 {
 
     private IProcessorRepository _procRepo;
-
+    //private readonly MLContext _mlContext;
+    //DataViewSchema dataPrepPipelineSchema, modelSchema;
+    //private readonly PredictionEngine<Processor, Processor> _predictionEngine;
     public ProcessorController(IProcessorRepository procRepo)
     {
         _procRepo = procRepo;
     }
+
+    [HttpPost]
+    public async Task<IActionResult> CalculatePerformance(int id)
+    {
+        // Получение информации о процессоре по его ID
+        var processor = await _procRepo.GetById(id);
+        // Здесь используйте вашу ML.NET модель для расчета производительности процессора
+        //float performance = _procRepo.CalculatePerformance(processor); // Замените это на ваш вызов ML.NET модели
+
+        //// Здесь можно что-то сделать с результатом performance
+        //return RedirectToAction(nameof(Detail), new { id }); // Вернуться на страницу деталей процессора или на другую страницу
+        if (processor == null)
+        {
+            return NotFound();
+        }
+
+
+        // Вызов ML.NET модели для расчета производительности
+        float performance = _procRepo.CalculatePerformance(processor); // Замените на свой метод расчета
+
+        TempData["Performance"] = performance.ToString();
+
+        // Перенаправление на страницу Detail для отображения результата
+        return RedirectToAction(nameof(Detail), new { id });
+        //// Возвращаем результат в формате JSON
+        //return Json(new { performance });
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> Detail(int id = 0)
+    {
+
+        if (id == 0)
+        {
+            return NotFound();
+        }
+        var processor = await _procRepo.GetById(id);
+        if (processor == null)
+        {
+            return NotFound();
+        }
+        else
+        {
+            return View(processor);
+        }
+
+    }
+
 
     public async Task<IActionResult> Index(SortState sortState)
     {

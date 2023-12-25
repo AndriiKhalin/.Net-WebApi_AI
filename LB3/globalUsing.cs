@@ -5,3 +5,4 @@ global using Microsoft.EntityFrameworkCore;
 global using LB3.Repositories;
 global using LB3.Features;
 global using LB3;
+global using Microsoft.ML;
