@@ -1,8 +1,10 @@
 ﻿
 
-public class ComponentComputer
+public class ComponentComputer : IEntity
 {
     public int Id { get; set; }
+
+    public string? Name { get; set; }
 
     public int? ProcessorId { get; set; }
 
@@ -28,5 +30,7 @@ public class ComponentComputer
 
     public Unit? Unit { get; set; }
 
+    public float Price { get; set; }
     public List<Computer> Computers { get; set; } = new();
+
 }

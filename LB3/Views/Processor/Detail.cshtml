@@ -1,0 +1,204 @@
+﻿@model Processor
+@{
+    ViewData["Title"] = "Detail Processor";
+}
+
+@* <form method="post" asp-action="Detail">
+    <div class="card">
+        <div class="card-header text-center fw-bold bg-success">
+            <h2>@ViewData["Title"]</h2>
+        </div>
+        <div class="card-body">
+            <div class="form-floating mb-2">
+                <input asp-for="Id" class="form-control" readonly />
+                <label asp-for="Id"></label>
+
+            </div>
+
+            <div class="form-floating mb-2">
+                <input asp-for="Name" class="form-control" readonly />
+                <label asp-for="Name"></label>
+               
+            </div>
+            <div class="form-floating mb-2">
+                <input asp-for="SocketType" class="form-control" readonly />
+                <label asp-for="SocketType"></label>
+            </div>
+            <div class="form-floating mb-2">
+                <input asp-for="ProcessorFamily" class="form-control" readonly />
+                <label asp-for="ProcessorFamily"></label>
+            </div>
+            <div class="form-floating mb-2">
+                <input asp-for="ProcessorGeneration" class="form-control" readonly />
+                <label asp-for="ProcessorGeneration"></label>
+            </div>
+
+            <div class="form-floating mb-2">
+                <input asp-for="NumCores" class="form-control" readonly />
+                <label asp-for="NumCores"></label>
+            </div>
+            <div class="form-floating mb-2">
+                <input asp-for="NumThreads" class="form-control" readonly />
+                <label asp-for="NumThreads"></label>
+            </div>
+            <div class="form-floating mb-2">
+                <input asp-for="ClockFrequency" class="form-control" readonly />
+                <label asp-for="ClockFrequency"></label>
+            </div>
+
+            <div class="form-floating mb-2">
+                <input asp-for="Price" class="form-control" readonly />
+                <label asp-for="Price"></label>
+            </div>
+
+
+            <div>
+                <div class="d-grid gap-2   d-md-flex justify-content-md-center">
+                    <a asp-controller="Processor" asp-action="Index" class="btn btn-primary col-3">Back</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</form> *@
+
+<div>
+    <h4>Processor</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Id)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        @* <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.Processor.Image)
+        </dt>
+        <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.Processor.Image)
+        </dd> *@
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SocketType)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SocketType)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ProcessorModel)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ProcessorModel)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ProcessorGeneration)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ProcessorGeneration)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.NumCores)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.NumCores)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.NumThreads)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.NumThreads)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ClockFrequency)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ClockFrequency)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+    </dl>
+    @* <div id="performanceBlock" style="display:none;">
+        <h5>Performance:</h5>
+        <p id="performanceValue"></p>
+    </div> *@
+    
+
+    <!-- Отображение производительности -->
+    @* @if (TempData["Performance"] != null)
+    {
+        var Performance = (TempData["Performance"] > 0 && TempData["Performance"] < 2000) ? "Low productivity" :
+            (TempData["Performance"] >= 2000 && TempData["Performance"] < 5000) ? "Low Middle productivity" :
+                (TempData["Performance"] >= 5000 && TempData["Performance"] < 10000) ? "Middle productivity" :
+                    (TempData["Performance"] >= 10000 && TempData["Performance"] < 15000) ? "High Middle productivity" :
+                        TempData["Performance"] >= 15000 ? "High productivity" :
+                            "No productivity";
+
+        <div class="mt-3">
+            <h5>Performance:</h5>
+            <p>@TempData["Performance"] </p>
+        </div>
+    } *@
+    
+    @if (TempData["Performance"] != null && float.TryParse(TempData["Performance"].ToString(), out float performance))
+    {
+        var Performance = (performance > 0 && performance < 2000) ? "Low productivity" :
+            (performance >= 2000 && performance < 5000) ? "Low Middle productivity" :
+                (performance >= 5000 && performance < 10000) ? "Middle productivity" :
+                    (performance >= 10000 && performance < 15000) ? "High Middle productivity" :
+                        performance >= 15000 ? "High productivity" :
+                            "No productivity";
+
+        <div class="mt-3">
+            <h5>Performance:</h5>
+            <p> @Performance</p>
+        </div>
+    }
+
+    <form asp-controller="Processor" asp-action="CalculatePerformance" method="post">
+
+        <input type="hidden" name="id" value="@Model.Id" />
+        <button type="submit" class="btn btn-primary">Calculate Performance</button>
+    </form>
+    <div class="mt-3">
+        <a asp-controller="Processor" asp-action="Index" class="btn btn-primary">Back</a>
+    </div>
+
+    @* <div class="ms-5">
+        <div>
+            <a asp-controller="Processor" asp-action="Index" class="btn btn-primary col-2">Back</a>
+            <a id="calculatePerformance" asp-controller="Processor" asp-action="CalculatePerformance" asp-route-id="@Model.Id" class="btn btn-primary col-2">Calculate Performance</a>
+        </div>
+    </div> *@
+</div>
+
+@section Scripts
+{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    @* <script>
+        // При нажатии кнопки "Calculate Performance"
+        document.getElementById('calculatePerformance').addEventListener('click', function () {
+            var processorId = '@Model.Id'; // Получаем ID процессора
+
+            fetch('/Processor/CalculatePerformance/' + processorId, {
+                    method: 'POST'
+                })
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('performanceBlock').style.display = 'block';
+                    document.getElementById('performanceValue').innerText = 'Performance: ' + data.performance;
+                });
+        });
+    </script> *@
+}

@@ -1,5 +1,7 @@
 
 
+using Microsoft.ML;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -17,6 +19,7 @@ builder.Services.AddScoped<IVideoCardRepository, VideoCardRepository>();
 builder.Services.AddScoped<IRamRepository, RamRepository>();
 builder.Services.AddScoped<IUnitRepository, UnitRepository>();
 builder.Services.AddScoped<IMotherBoardRepository, MotherBoardRepository>();
+builder.Services.AddScoped<MLContext>();
 
 
 var app = builder.Build();

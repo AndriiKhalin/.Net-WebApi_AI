@@ -55,11 +55,11 @@
                     <tr class="text-center">
                 <td>@computer.Id</td>
                 <td>@computer.Name</td>
-                <td>@computer.Price</td>
                 <td>@computer.CreatedDate</td>
                 <td>@computer.LastUpdatedDate</td>
                 @* <td>@computer.Image</td> *@
-                <td>@computer.ComponentComputerId</td>
+                        <td>@computer.ComponentComputerId</td>
+                        <td>@computer.Price</td>
                 <td class="text-center">
                             <div>
                                 <a asp-controller="Computer" asp-action="Update" asp-route-id="@computer.Id" class="btn btn-success btn-sm">Edit</a>
