@@ -49,8 +49,6 @@ public class ProcessorRepository : IProcessorRepository
         public float Производительность { get; set; }
 
     }
-
-
     public class ModelOutput
     {
         [ColumnName(@"Производитель")]
@@ -84,7 +82,6 @@ public class ProcessorRepository : IProcessorRepository
         public float Score { get; set; }
 
     }
-
     public ProcessorRepository(ComputerDbContext context, MLContext mlContext)
     {
         _context = context;

@@ -5,29 +5,100 @@ namespace LB3.Controllers;
 public class HardDriveController : Controller
 {
     private IHardDriveRepository _hardRepo;
+    private readonly IConfiguration Configuration;
 
-    public HardDriveController(IHardDriveRepository hardRepo)
+    public int pageIndex = 1;
+    public int totalPages = 0;
+    public PaginateViewModel<HardDrive> PaginateViewModel { get; set; }
+
+    public HardDriveController(IHardDriveRepository hardRepo, IConfiguration configuration)
     {
         _hardRepo = hardRepo;
+        Configuration = configuration;
     }
 
-    public async Task<IActionResult> Index(SortState sortState)
+    [HttpGet]
+    public async Task<IActionResult> Detail(int id = 0)
     {
+
+        if (id == 0)
+        {
+            return NotFound();
+        }
+        var hardDrive = await _hardRepo.GetById(id);
+        if (hardDrive == null)
+        {
+            return NotFound();
+        }
+        else
+        {
+            return View(hardDrive);
+        }
+
+    }
+
+
+    public async Task<IActionResult> Index(int pageIndex, string searchString, SortState sortState)
+    {
+        var hardDrive = await _hardRepo.GetAll();
+
         var sort = new SortViewModel<HardDrive>(sortState);
 
+        //IQueryable<Processor> query = _context.Processors;
 
+
+        //IdSort = sort.IdSort;
+        //NameSort = sort.NameSort;
+        //PriceSort = sort.PriceSort;
+        //CurrentSort = sort.Current;
+        //SearchString =
+        //CurrentPage = pageIndex;
+
+
+        if (pageIndex == null || pageIndex < 1)
+        {
+            pageIndex = 1;
+        }
+
+
+        if (sortState != null && (sortState != SortState.None))
+        {
+            hardDrive = sort.SortList(hardDrive, sort.Current);
+        }
+        if (!string.IsNullOrEmpty(searchString))
+        {
+            //query = query.Where(p => p.Name.Contains(searchString));
+            hardDrive = SearchViewModel<HardDrive>.Search(hardDrive, searchString);
+        }
+
+        var pageSize = Configuration.GetValue("PageSize", 4);
+        PaginateViewModel = new PaginateViewModel<HardDrive>(hardDrive, pageIndex, pageSize);
+        this.pageIndex = (int)PaginateViewModel.PageIndex;
+        totalPages = PaginateViewModel.TotalPages;
+
+        //decimal count = query.Count();
+        //totalPages = (int)Math.Ceiling(count / pageSize);
+        //query = query.Skip((this.pageIndex - 1) * pageSize).Take(pageSize);
+        //Processor = await query.ToListAsync();
         ViewData["IdSort"] = sort.IdSort;
         ViewData["NameSort"] = sort.NameSort;
         ViewData["PriceSort"] = sort.PriceSort;
+        ViewData["CurrentSort"] = sort.Current;
         ViewData["IconId"] = sort.Up_DownId;
         ViewData["IconName"] = sort.Up_DownName;
         ViewData["IconPrice"] = sort.Up_DownPrice;
+        ViewData["SearchString"] = searchString;
+        ViewData["CurrentPage"] = this.pageIndex;
+        ViewData["PaginateViewModel"] = PaginateViewModel;
+        ViewData["totalPages"] = totalPages;
+        ViewData["pageIndex"] = this.pageIndex;
 
-        var hardDrives = await _hardRepo.GetAll();
-        hardDrives = sort.SortList(hardDrives, sortState);
 
-        return View(hardDrives);
+        hardDrive = await PaginateViewModel.CreateAsync();
+
+        return View(hardDrive);
     }
+
     [HttpGet]
     public IActionResult Create()
     {

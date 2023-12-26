@@ -31,7 +31,14 @@ public class ComponentComputerRepository : IComponentComputerRepository
 
     public async Task<IEnumerable<ComponentComputer>> GetAll()
     {
-        var componentComputers = await _context.ComponentComputers.ToListAsync();
+        var componentComputers = await _context.ComponentComputers
+            .Include(x => x.Processor)
+            .Include(x => x.HardDrive)
+            .Include(x => x.MotherBoard)
+            .Include(x => x.Ram)
+            .Include(x => x.Unit)
+            .Include(x => x.VideoCard)
+            .ToListAsync();
         return componentComputers;
     }
 

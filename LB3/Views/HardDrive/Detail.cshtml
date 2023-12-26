@@ -1,0 +1,61 @@
+﻿@model HardDrive
+@{
+    ViewData["Title"] = "Detail HardDrive";
+}
+
+
+
+<div>
+    <h4>HardDrive</h4>
+    <hr />
+    <dl class="row">
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Id)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        @* <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.Processor.Image)
+        </dt>
+        <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.Processor.Image)
+        </dd> *@
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.HardDriveType)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.HardDriveType)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.StorageSize)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.StorageSize)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ReadWriteSpeed)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ReadWriteSpeed)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+    </dl>
+</div>
+<div class="ms-5">
+    <a asp-action="Update" asp-controller="HardDrive" asp-route-id="@Model.Id" class="btn btn-success me-md-2">Edit</a>
+    <a asp-action="Index" asp-controller="HardDrive" class="btn btn-primary">Back to List</a>
+</div>

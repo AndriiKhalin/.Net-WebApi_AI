@@ -10,8 +10,13 @@
         </div>
         <div class="card-body">
             @*<input type="hidden" asp-for="Id"/>*@
+            
             <div class="form-floating mb-2">
-                <input asp-for="ProcessorId" class="form-control" />
+                <input asp-for="Id" class="form-control" readonly />
+                <label asp-for="Id"></label>
+            </div>
+            <div class="form-floating mb-2">
+                <input asp-for="ProcessorId" class="form-control"/>
                 <label asp-for="ProcessorId"></label>
                 <span asp-validation-for="ProcessorId" class="text-danger"></span>
             </div>

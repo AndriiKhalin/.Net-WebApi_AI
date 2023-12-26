@@ -1,0 +1,77 @@
+﻿@model ComponentComputer
+@{
+    ViewData["Title"] = "Detail ComponentComputer";
+}
+
+
+<div>
+    <h4>ComponentComputer</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Id)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ProcessorId)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ProcessorId)
+        </dd>
+        @* <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.Processor.Image)
+        </dt>
+        <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.Processor.Image)
+        </dd> *@
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.MotherBoardId)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.MotherBoardId)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.HardDriveId)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.HardDriveId)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.VideoCardId)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.VideoCardId)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.RamId)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.RamId)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.UnitId)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.UnitId)
+        </dd>
+        
+
+    </dl>
+
+    <div class="mt-3">
+        <a asp-controller="ComponentComputer" asp-action="Index" class="btn btn-primary">Back</a>
+    </div>
+
+    
+</div>
+
+@section Scripts
+{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    
+}

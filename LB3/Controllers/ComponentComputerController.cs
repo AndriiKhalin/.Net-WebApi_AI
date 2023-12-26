@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 namespace LB3.Controllers;
 
@@ -6,17 +7,89 @@ public class ComponentComputerController : Controller
 {
 
     private IComponentComputerRepository _compRepo;
+    private readonly IConfiguration Configuration;
 
-    public ComponentComputerController(IComponentComputerRepository compRepo)
+    public int pageIndex = 1;
+    public int totalPages = 0;
+    public PaginateViewModel<ComponentComputer> PaginateViewModel { get; set; }
+
+
+    public ComponentComputerController(IComponentComputerRepository compRepo, IConfiguration configuration)
     {
         _compRepo = compRepo;
+        Configuration = configuration;
+
     }
 
-    public async Task<IActionResult> Index()
+    [HttpGet]
+    public async Task<IActionResult> Detail(int id = 0)
     {
-        var componentComputers = await _compRepo.GetAll();
-        return View(componentComputers);
+
+        if (id == 0)
+        {
+            return NotFound();
+        }
+        var componentComputer = await _compRepo.GetById(id);
+        if (componentComputer == null)
+        {
+            return NotFound();
+        }
+        else
+        {
+            return View(componentComputer);
+        }
+
     }
+
+
+    public async Task<IActionResult> Index(int pageIndex, string searchString, SortState sortState)
+    {
+        var componentComputer = await _compRepo.GetAll();
+
+        var sort = new SortViewModel<ComponentComputer>(sortState);
+
+
+        if (pageIndex == null || pageIndex < 1)
+        {
+            pageIndex = 1;
+        }
+
+
+        if (sortState != null && (sortState != SortState.None))
+        {
+            componentComputer = sort.SortList(componentComputer, sort.Current);
+        }
+        if (!string.IsNullOrEmpty(searchString))
+        {
+
+            componentComputer = SearchViewModel<ComponentComputer>.Search(componentComputer, searchString);
+        }
+
+        var pageSize = Configuration.GetValue("PageSize", 4);
+        PaginateViewModel = new PaginateViewModel<ComponentComputer>(componentComputer, pageIndex, pageSize);
+        this.pageIndex = (int)PaginateViewModel.PageIndex;
+        totalPages = PaginateViewModel.TotalPages;
+
+
+        ViewData["IdSort"] = sort.IdSort;
+        ViewData["NameSort"] = sort.NameSort;
+        ViewData["PriceSort"] = sort.PriceSort;
+        ViewData["CurrentSort"] = sort.Current;
+        ViewData["IconId"] = sort.Up_DownId;
+        ViewData["IconName"] = sort.Up_DownName;
+        ViewData["IconPrice"] = sort.Up_DownPrice;
+        ViewData["SearchString"] = searchString;
+        ViewData["CurrentPage"] = this.pageIndex;
+        ViewData["PaginateViewModel"] = PaginateViewModel;
+        ViewData["totalPages"] = totalPages;
+        ViewData["pageIndex"] = this.pageIndex;
+
+
+        componentComputer = await PaginateViewModel.CreateAsync();
+
+        return View(componentComputer);
+    }
+
     [HttpGet]
     public IActionResult Create()
     {
