@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LB3.Migrations
 {
     [DbContext(typeof(ComputerDbContext))]
-    [Migration("20231225174253_CreateDb")]
-    partial class CreateDb
+    [Migration("20231225230927_CreatDb")]
+    partial class CreatDb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

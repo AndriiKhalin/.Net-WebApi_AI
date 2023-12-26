@@ -14,4 +14,5 @@ public interface IComponentComputerRepository
 
     Task Delete(int id);
 
+
 }

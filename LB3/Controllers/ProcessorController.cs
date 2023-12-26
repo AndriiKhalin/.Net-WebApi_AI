@@ -1,5 +1,7 @@
 ﻿using LB3.Features;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.ML;
 using System.Diagnostics;
 
@@ -9,40 +11,40 @@ public class ProcessorController : Controller
 {
 
     private IProcessorRepository _procRepo;
-    //private readonly MLContext _mlContext;
-    //DataViewSchema dataPrepPipelineSchema, modelSchema;
-    //private readonly PredictionEngine<Processor, Processor> _predictionEngine;
-    public ProcessorController(IProcessorRepository procRepo)
+    private readonly IConfiguration Configuration;
+
+    public int pageIndex = 1;
+    public int totalPages = 0;
+    public PaginateViewModel<Processor> PaginateViewModel { get; set; }
+
+    public ProcessorController(IProcessorRepository procRepo, IConfiguration configuration)
     {
         _procRepo = procRepo;
+        Configuration = configuration;
     }
 
     [HttpPost]
     public async Task<IActionResult> CalculatePerformance(int id)
     {
-        // Получение информации о процессоре по его ID
-        var processor = await _procRepo.GetById(id);
-        // Здесь используйте вашу ML.NET модель для расчета производительности процессора
-        //float performance = _procRepo.CalculatePerformance(processor); // Замените это на ваш вызов ML.NET модели
 
-        //// Здесь можно что-то сделать с результатом performance
-        //return RedirectToAction(nameof(Detail), new { id }); // Вернуться на страницу деталей процессора или на другую страницу
+        var processor = await _procRepo.GetById(id);
+
         if (processor == null)
         {
             return NotFound();
         }
 
 
-        // Вызов ML.NET модели для расчета производительности
-        float performance = _procRepo.CalculatePerformance(processor); // Замените на свой метод расчета
+
+        float performance = _procRepo.CalculatePerformance(processor);
 
         TempData["Performance"] = performance.ToString();
 
-        // Перенаправление на страницу Detail для отображения результата
+
         return RedirectToAction(nameof(Detail), new { id });
-        //// Возвращаем результат в формате JSON
-        //return Json(new { performance });
     }
+
+
 
     [HttpGet]
     public async Task<IActionResult> Detail(int id = 0)
@@ -65,29 +67,55 @@ public class ProcessorController : Controller
     }
 
 
-    public async Task<IActionResult> Index(SortState sortState)
+    public async Task<IActionResult> Index(int pageIndex, string searchString, SortState sortState)
     {
-
+        var processors = await _procRepo.GetAll();
 
         var sort = new SortViewModel<Processor>(sortState);
 
 
 
+
+        if (pageIndex == null || pageIndex < 1)
+        {
+            pageIndex = 1;
+        }
+
+
+        if (sortState != null && (sortState != SortState.None))
+        {
+            processors = sort.SortList(processors, sort.Current);
+        }
+        if (!string.IsNullOrEmpty(searchString))
+        {
+            processors = SearchViewModel<Processor>.Search(processors, searchString);
+        }
+
+        var pageSize = Configuration.GetValue("PageSize", 4);
+        PaginateViewModel = new PaginateViewModel<Processor>(processors, pageIndex, pageSize);
+        this.pageIndex = (int)PaginateViewModel.PageIndex;
+        totalPages = PaginateViewModel.TotalPages;
+
+
         ViewData["IdSort"] = sort.IdSort;
         ViewData["NameSort"] = sort.NameSort;
         ViewData["PriceSort"] = sort.PriceSort;
+        ViewData["CurrentSort"] = sort.Current;
         ViewData["IconId"] = sort.Up_DownId;
         ViewData["IconName"] = sort.Up_DownName;
         ViewData["IconPrice"] = sort.Up_DownPrice;
+        ViewData["SearchString"] = searchString;
+        ViewData["CurrentPage"] = this.pageIndex;
+        ViewData["PaginateViewModel"] = PaginateViewModel;
+        ViewData["totalPages"] = totalPages;
+        ViewData["pageIndex"] = this.pageIndex;
 
 
-
-        var processors = await _procRepo.GetAll();
-
-        processors = sort.SortList(processors, sortState);
+        processors = await PaginateViewModel.CreateAsync();
 
         return View(processors);
     }
+
     [HttpGet]
     public IActionResult Create()
     {

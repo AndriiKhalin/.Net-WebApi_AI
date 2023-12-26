@@ -1,0 +1,60 @@
+﻿@model MotherBoard
+@{
+    ViewData["Title"] = "Detail MotherBoard";
+}
+
+
+<div>
+    <h4>MotherBoard</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Id)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        @* <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.Processor.Image)
+        </dt>
+        <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.Processor.Image)
+        </dd> *@
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.FormFactor)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.FormFactor)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Chipset)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Chipset)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Socket)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Socket)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+    </dl>
+</div>
+
+<div class="ms-5">
+    <a asp-controller="MotherBoard" asp-action="Update" asp-route-id="@Model.Id" class="btn btn-success me-md-2">Edit</a>
+    <a asp-controller="MotherBoard" asp-action="Index" class="btn btn-primary">Back to List</a>
+</div>

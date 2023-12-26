@@ -6,3 +6,6 @@ global using LB3.Repositories;
 global using LB3.Features;
 global using LB3;
 global using Microsoft.ML;
+global using Microsoft.EntityFrameworkCore;
+global using System.Runtime.Intrinsics.Arm;
+global using Microsoft.ML.Data;

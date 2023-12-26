@@ -15,5 +15,5 @@ public interface IComputerRepository
 
     Task Delete(int id);
 
-
+    float CalculatePerformance(Processor processor);
 }
