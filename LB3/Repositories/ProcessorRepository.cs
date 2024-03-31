@@ -87,7 +87,7 @@ public class ProcessorRepository : IProcessorRepository
         _context = context;
         _mlContext = mlContext;
 
-        var mlModelPath = Path.GetFullPath("D:\\IT\\.NET_LB\\AI\\ProcessorModel\\ProcessorModel\\ProcessorModel.mlnet");
+        var mlModelPath = Path.GetFullPath("D:\\IT\\Repo\\Kyrsova_.NET\\ProcessorModel\\ProcessorModel.mlnet");
         _mlModel = _mlContext.Model.Load(mlModelPath, out _);
         _predictionEngine = _mlContext.Model.CreatePredictionEngine<ModelInput, ModelOutput>(_mlModel);
     }
